@@ -35,10 +35,8 @@ public class Primitives {
                     totalExpenses += amount;
                 }
             } else if (choice == 3) {
-                int tax1 = totalIncome * 6 / 100;
-                int diff = totalIncome - totalExpenses;
-                if (diff < 0) diff = 0;
-                int tax2 = diff * 15 / 100;
+                int tax1 = calculateUsnIncome(totalIncome, totalExpenses);
+                int tax2 = calculateUsnIncomeMinusExpenses(totalIncome, totalExpenses);
                 
                 System.out.println("Налог на УСН доходы: " + tax1 + " рублей");
                 System.out.println("Налог на УСН доходы минус расходы: " + tax2 + " рублей");
@@ -56,5 +54,17 @@ public class Primitives {
         }
         
         scanner.close();
+    }
+    
+    private static int calculateUsnIncome(int income, int expenses) {
+        return income * 6 / 100;
+    }
+    
+    private static int calculateUsnIncomeMinusExpenses(int income, int expenses) {
+        int diff = income - expenses;
+        if (diff < 0) {
+            return 0;
+        }
+        return diff * 15 / 100;
     }
 }
